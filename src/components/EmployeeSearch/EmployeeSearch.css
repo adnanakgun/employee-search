@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Antonio';
+    src: local('Antonio'), url(../../style/antonio.ttf) format('truetype');
+}
+
+body {
+    position: relative;
+}
+
+#root:before {
+    content: 'asdf';
+    position: fixed;
+    right: -10%;
+    top: -10%;
+    height: 25%;
+    width: 25%;
+    background: #fc4217;
+    transform: rotate(45deg);
+}
+
+#root:after {
+    content: 'asdf';
+    position: fixed;
+    left: -10%;
+    top: -10%;
+    height: 25%;
+    width: 25%;
+    background: #fc4217;
+    transform: rotate(-45deg);
+}
+
+body:before {
+    background: url('../../style/s2.jpg') no-repeat;
+    background-size: contain;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 120%;
+    position: fixed;
+    z-index: -1;
+}
+
+body:after {
+    content: '';
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: 120%;
+    z-index: -1;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.ui.container {
+    padding-top: 40px;
+}
+
+.ui.container .divided.list h2 {
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #fc4217;
+    font-family: 'Antonio';
+    display: inline-block;
+    padding: 25px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    border-radius: 5px;
+}
