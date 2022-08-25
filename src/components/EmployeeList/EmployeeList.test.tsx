@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { Employee } from '../../domains/employee.interface';
 import EmployeeList from './EmployeeList';
+import { within } from '@testing-library/dom'
 
 describe('EmployeeList', () => {
 
     const EMPLOYEE_DATA: Employee[] = [
         { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@domain.com', department: 'Finance', tel: '11111', isActive: 'Y' },
-        { id: 2, firstName: 'Bob', lastName: 'Simpson', email: 'bob.simpson@domain.com', department: 'IT', tel: '33333', isActive: 'Y' }
+        { id: 2, firstName: 'Bob', lastName: 'Simpson', email: 'bob.simpson@domain.com', department: 'IT', tel: '33333', isActive: 'N' }
     ];
 
     const EMPTY_EMPLOYEE_DATA: Employee[] = [];
@@ -42,5 +43,19 @@ describe('EmployeeList', () => {
         const bobSimpsonEmail = screen.queryByText(/bob.simpson@domain.com/i);
         expect(bobSimpsonTel).toBeInTheDocument();
         expect(bobSimpsonEmail).not.toBeInTheDocument();
+    });
+
+    it('should show the employee as "active" if isActive is Y', ()=> {
+
+        render(<EmployeeList employeeList={EMPLOYEE_DATA}/>);   
+        const { getByText } = within(screen.getByTestId('employee-1-status')); // 1 comes from EMPLOYEE_DATA
+        expect(getByText('Active')).toBeInTheDocument();
+    });
+
+    it('should show the employee as "inactive" if isActive is N', ()=> {
+
+        render(<EmployeeList employeeList={EMPLOYEE_DATA}/>);   
+        const { getByText } = within(screen.getByTestId('employee-2-status')); // 2 comes from EMPLOYEE_DATA
+        expect(getByText('Inactive')).toBeInTheDocument();
     });
 });
