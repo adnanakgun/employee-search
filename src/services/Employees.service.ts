@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Employee } from '../domains/employee.interface';
 
 const EmployeesService = {
@@ -9,8 +10,10 @@ const EmployeesService = {
             { id: 4, firstName: 'Max' , lastName: 'Mayfield', email: 'max.mayfield@domain.com', department: 'IT', tel: '44444', isActive: 'Y' },
             { id: 5, firstName: 'Tom' , lastName: 'Jones', email: 'tom.jones@domain.com', department: 'IT', tel: '44444', isActive: 'N' }
         ];
+    },
+    postEmployees: async (employees: Employee[]) => {
+        await axios.post('https://jsonplaceholder.typicode.com/posts', employees);
     }
-
 };
 
 export default EmployeesService;

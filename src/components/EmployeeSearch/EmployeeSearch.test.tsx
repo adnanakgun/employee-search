@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import axios from 'axios';
 import { Employee } from '../../domains/employee.interface';
 import EmployeesService from '../../services/Employees.service';
 import EmployeeSearch from './EmployeeSearch';
@@ -27,16 +28,14 @@ describe('EmployeeSearch', () => {
 
         mockEmployeesService.mockRestore();
     });
-
-    it('should log the currently visible employees', () => {
-        const mockConsole = jest.spyOn(console, 'log');
+    
+    it('should post the currently visible employees to the backend', () => {
+        const mockAxiosPost = jest.spyOn(axios, 'post');
         render(<EmployeeSearch/>);
         const employeeForm = screen.getByLabelText('employee-form');
         fireEvent.submit(employeeForm);
-        expect(mockConsole).toHaveBeenCalledWith(EMPLOYEE_DATA);
-        
-        mockEmployeesService.mockRestore();
-        mockConsole.mockRestore();
+        // URL should come from a .env file
+        expect(mockAxiosPost).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/posts', EMPLOYEE_DATA);
     });
 
 });

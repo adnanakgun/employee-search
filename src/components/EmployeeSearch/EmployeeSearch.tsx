@@ -38,7 +38,7 @@ class EmployeeSearch extends React.Component {
 
     employeeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log(this.state.filteredEmployeeList);
+        EmployeesService.postEmployees(this.state.filteredEmployeeList);
     };
 
     render() {
